@@ -39,7 +39,7 @@
             </ul>
             <form class="d-flex">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
+              <button class="btn btn-light" type="submit">Search</button>
             </form>
           </div>
         </div>
@@ -61,42 +61,66 @@
             foreach($daftar_orang as $baris) {
               ?>
                 <tr>
-                  <th scope="row">1</th>
+                  <th scope="row"><?php echo $baris->id ?></th>
                   <td><?php echo $baris->nama ?></td>
                   <td><?php echo $baris->alamat ?></td>
                   <td>
-                  <button class="btn btn-dark" type="submit">Ubah</button>
-                  <button class="btn btn-primary" type="submit">Hapus</button>
+                  <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ubahModal<?php echo $baris->id ?>">Ubah</button>
+                  <a class="btn btn-danger" href="Welcome/hapusOrang/<?php echo $baris->id ?>">Hapus</a>
                   </td>
                 </tr>
+
+                <div class="modal fade" id="ubahModal<?php echo $baris->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Peserta</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <form action="Welcome/ubahOrang" method="post"> 
+                      <div class="modal-body">
+                      <input type="hidden" name="id" value="<?php echo $baris->id ?>">
+                      <input type="Text" name="nama" class="form-control" value "<?php echo $baris->nama ?>">
+                        <br>
+                        <input type="Text" name= "alamat" class="form-control" value "<?php echo $baris->alamat ?>">
+                        <br>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </form>
+                    </div>
+                  </div>
+                </div>
               <?php
             }
           ?>
           
         </tbody>
       </table>
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Peserta</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="index.php/Welcome/TambahOrang" method="post"> 
-            <div class="modal-body">
-             <input type="Text" name="Nama" class="form-control">
-              <br>
-              <input type="Text" name= "Alamat" class="form-control">
-              <br>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Save changes</button>
-            </div>
-          </form>
-          </div>
-        </div>
-      </div>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Peserta</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <form action="Welcome/TambahOrang" method="post"> 
+                      <div class="modal-body">
+                      <input type="Text" name="Nama" class="form-control">
+                        <br>
+                        <input type="Text" name= "Alamat" class="form-control">
+                        <br>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </form>
+                    </div>
+                  </div>
+                </div>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
 </html>

@@ -35,11 +35,36 @@ class Welcome extends CI_Controller {
 		$this->load->model('Model_Orang');
 		$this->load->helper('url');
 
-		$nama = $this ->input->post("nama");
-		$alamat = $this ->input->post("alamat");
+		$nama = $this ->input->post("Nama");
+		$alamat = $this ->input->post("Alamat");
 
 		$this->Model_Orang->ProsesTambahOrang($nama, $alamat);
 
-		redirect("Welcome");
+		redirect('Welcome');
 	}
+
+	public function hapusOrang($id) {
+		$this->load->model('Model_Orang');
+		$this->load->helper('url');
+
+		$this->Model_Orang->prosesHapusOrang($id);
+
+		redirect('Welcome');
+	}
+
+	public function ubahOrang() {
+		$this->load->model('Model_Orang');
+		$this->load->helper('url');
+
+		$id = $this ->input->post("id");
+		$nama = $this ->input->post("nama");
+		$alamat = $this ->input->post("alamat");
+
+		$this->Model_Orang->ProsesUbahOrang($id, $nama, $alamat);
+
+		redirect('Welcome');
+	}
+
 }
+
+?>
